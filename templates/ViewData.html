@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %} <title> CRUD | ViewData </title>{% endblock title%}
+{% block body %}
+<div class="container ab mt-5">
+    <table class="table" style="font-size:20px ;">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in x %}
+            <tr>
+                <th scope="row">{{i.Id}}</th>
+                <td>{{i.name}}</td>
+                <td>{{i.desc}}</td>
+                <td>{{i.price}}</td>
+                <td>
+
+
+                    <a href="/edit/{{i.Id}}" class="btn btn-success">Edit</a>
+                    <a href="/delete/{{i.Id}}" class="btn btn-danger">Delete</a>
+
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+
+{% endblock body %}

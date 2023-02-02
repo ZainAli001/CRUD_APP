@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container ab">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="modal-box">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success btn-lg show-modal mt-5 mb-3" data-toggle="modal"
+                    data-target="#myModal">
+                    Add New Prodduct
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content clearfix">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                            <div class="modal-body">
+                                <h3 class="title">Add Products</h3>
+                                <form method="post" action="/add">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <span class="input-icon"><i class="fa fa-user"></i></span>
+                                        <input type="name" name="name" class="form-control" placeholder="Enter Name">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="input-icon"><i class="fas fa-book"></i></span>
+                                        <textarea class="form-control" name="description" placeholder="Description"
+                                            id="floatingTextarea" style="height: 50px;"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="input-icon"><i class="fa fa-user"></i></span>
+                                        <input type="text" name="price" class="form-control" placeholder="Enter Price">
+                                    </div>
+
+                                    <button class="btn" type="submit">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <table class="table" style="    font-size: 20px;">
+
+
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if todos %}
+            {% for i in todos %}
+            <tr>
+                <th scope="row">{{i.Id}}</th>
+                <td>{{i.name}}</td>
+                <td>{{i.desc}}</td>
+                <td>$ {{i.price}}</td>
+                <td>
+                    <span><a href="/edit/{{i.Id}} " class="btn btn-primary">Edit</a>
+                        <a href="/delete/{{i.Id}}" class="btn btn-danger">Delete</a>
+                        <a href="/viewData/{{i.Id}}" target="_blank"  class="btn btn-success">View</a> </span>
+
+
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <h2 class="fw-bold">No Product Available </h2>
+            {% endif %}
+
+        </tbody>
+    </table>
+
+
+
+
+</div>
+
+
+
+
+{% endblock body %}
